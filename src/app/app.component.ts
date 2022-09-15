@@ -72,8 +72,20 @@ export class AppComponent {
       data: { company }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      result && console.log('The dialog was closed ', result);
+    dialogRef.afterClosed().subscribe((result: Company) => {
+      if (result) {
+        const selectedCompanies = [ ...this.selectedCompanies ];
+
+        selectedCompanies.forEach((item, index) => {
+          if (item.entityId === result.entityId) {
+            selectedCompanies[index] = { ...result };
+          }
+        });
+
+        this.selectedCompanies = selectedCompanies;
+        this.dataSource = new MatTableDataSource(this.selectedCompanies);
+        this.dataSource.sort = this.sort;
+      }
     });
   }
 }
