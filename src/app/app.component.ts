@@ -12,7 +12,15 @@ export class AppComponent {
   companies: any[] = [];
   selectedCompanies: any[] = [];
   displayedColumns: string[] = [
-    'entityId', 'name', 'identificationNumber', 'expirationDate', 'contactName', 'contactMail', 'ipAddress', 'logo'
+    'entityId',
+    'name',
+    'identificationNumber',
+    'expirationDate',
+    'contactName',
+    'contactMail',
+    'ipAddress',
+    'logo',
+    'actions'
   ];
   dataSource: any = [];
   charge: boolean = false;
@@ -21,6 +29,7 @@ export class AppComponent {
 
   constructor(private  companiesService: CompaniesService) {
     this.getCompanies();
+    this.deleteCompany = this.deleteCompany.bind(this);
   }
 
   async getCompanies() {
@@ -44,6 +53,12 @@ export class AppComponent {
       this.selectedCompanies = this.selectedCompanies.filter(item => item.entityId !== company.entityId);
     }
 
+    this.dataSource = new MatTableDataSource(this.selectedCompanies);
+    this.dataSource.sort = this.sort;
+  }
+
+  deleteCompany(company: any) {
+    this.selectedCompanies = this.selectedCompanies.filter(item => item.entityId !== company.entityId);
     this.dataSource = new MatTableDataSource(this.selectedCompanies);
     this.dataSource.sort = this.sort;
   }
