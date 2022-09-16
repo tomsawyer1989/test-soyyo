@@ -1,0 +1,78 @@
+<h1 mat-dialog-title>Editar {{ company.name }}</h1>
+<div mat-dialog-content>
+    <form style="font-size: 12px;">
+        <mat-form-field style="width: 100%;" appearance="outline">
+            <mat-label>Nombre de entidad</mat-label>
+            <input
+                matInput
+                type="text"
+                [(ngModel)]="company.name"
+                [ngModelOptions]="{standalone: true}"
+            />
+        </mat-form-field>
+        <mat-form-field style="width: 100%;" appearance="outline">
+            <mat-label>Número de identificación de la entidad</mat-label>
+            <input
+                matInput
+                type="text"
+                [(ngModel)]="company.identificationNumber"
+                [ngModelOptions]="{standalone: true}"
+            />
+        </mat-form-field>
+        <mat-form-field style="width: 100%;" appearance="outline">
+            <mat-label>Fecha de expiración</mat-label>
+            <input
+                matInput
+                type="text"
+                [(ngModel)]="company.expirationDate"
+                [ngModelOptions]="{standalone: true}"
+            />
+        </mat-form-field>
+        <mat-form-field style="width: 100%;" appearance="outline">
+            <mat-label>Nombre de contacto</mat-label>
+            <input
+                matInput
+                type="text"
+                [(ngModel)]="company.contactName"
+                [ngModelOptions]="{standalone: true}"
+            />
+        </mat-form-field>
+        <mat-form-field style="width: 100%;" appearance="outline">
+            <mat-label>Correo de contacto</mat-label>
+            <input
+                matInput
+                type="text"
+                [(ngModel)]="company.contactMail"
+                [ngModelOptions]="{standalone: true}"
+            />
+        </mat-form-field>
+        <mat-form-field style="width: 100%;" appearance="outline">
+            <mat-label>Dirección IP</mat-label>
+            <input
+                matInput
+                type="text"
+                [(ngModel)]="company.ipAddress"
+                [ngModelOptions]="{standalone: true}"
+            />
+        </mat-form-field>
+        <mat-form-field style="width: 100%;" appearance="outline">
+            <mat-label>Logo</mat-label>
+            <input
+                matInput
+                type="text"
+                [(ngModel)]="company.logo"
+                [ngModelOptions]="{standalone: true}"
+            />
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button
+        mat-button
+        [mat-dialog-close]="company"
+        cdkFocusInitial
+    >
+        Aceptar
+    </button>
+    <button mat-button (click)="onNoClick();">Cancelar</button>
+</div>
