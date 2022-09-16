@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Inject, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, Inject, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,8 +9,13 @@ import { Company } from '../../models/company.model';
   templateUrl: './table-companies.component.html',
   styleUrls: ['./table-companies.component.css']
 })
-export class TableCompaniesComponent implements OnInit, OnChanges {
-  @Input() selectedCompanies: Company[] = [];
+export class TableCompaniesComponent implements OnInit {
+  @Output() deleteCompaniesEvent = new EventEmitter();
+  @Input() set data(value: Company[]) {
+    this.dataSource = new MatTableDataSource(value);
+    this.dataSource.sort = this.sort;
+  }
+  selectedCompanies: Company[] = [];
   displayedColumns: string[] = [
     'entityId',
     'name',
@@ -22,28 +27,18 @@ export class TableCompaniesComponent implements OnInit, OnChanges {
     'logo',
     'actions'
   ];
-  dataSource: any = [];
-
+  dataSource: any = MatTableDataSource;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog: MatDialog) {
-    // this.deleteCompany = this.deleteCompany.bind(this);
-    // this.openEditCompany = this.openEditCompany.bind(this);
   }
 
   ngOnInit(): void {
-    console.log('tablaaaa ', this.selectedCompanies);
-    // this.dataSource = new MatTableDataSource(this.selectedCompanies);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('tablaaaa 2', this.selectedCompanies);
+    this.dataSource.sort = this.sort;
   }
 
   deleteCompany(company: Company) {
-    this.selectedCompanies = this.selectedCompanies.filter(item => item.entityId !== company.entityId);
-    this.dataSource = new MatTableDataSource(this.selectedCompanies);
-    this.dataSource.sort = this.sort;
+    this.deleteCompaniesEvent.emit(company);
   }
 
   openEditCompany(company: Company) {
@@ -63,8 +58,8 @@ export class TableCompaniesComponent implements OnInit, OnChanges {
         });
 
         this.selectedCompanies = selectedCompanies;
-        this.dataSource = new MatTableDataSource(this.selectedCompanies);
-        this.dataSource.sort = this.sort;
+        // this.dataSource = new MatTableDataSource(this.selectedCompanies);
+        // this.dataSource.sort = this.sort;
       }
     });
   }

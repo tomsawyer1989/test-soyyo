@@ -1,6 +1,6 @@
 <ul style="list-style-type: none; margin-right: 30px;">
     <li *ngFor="let item of companies;">
-        <mat-checkbox class="example-margin" (change)="onSelected($event, item);" color="primary">
+        <mat-checkbox class="example-margin" [checked]="isCompany(item.entityId)" (change)="onSelected($event, item);" color="primary">
             {{ item.name }}
         </mat-checkbox>
     </li>

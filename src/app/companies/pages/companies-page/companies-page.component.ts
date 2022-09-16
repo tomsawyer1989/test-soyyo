@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CompaniesService } from 'src/app/services/companies.service';
 import { Company } from '../../models/company.model';
@@ -11,7 +12,10 @@ import { Company } from '../../models/company.model';
 export class CompaniesPageComponent implements OnInit {
   companies: Company[] = [];
   selectedCompanies: Company[] = [];
+  dataSource: any = [];
   charge: boolean = false;
+
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private  companiesService: CompaniesService, private changeDetectorRef: ChangeDetectorRef) { }
 
@@ -34,17 +38,20 @@ export class CompaniesPageComponent implements OnInit {
 
   onSelected(value: any) {
     if (value.e.checked) {
-      this.selectedCompanies.push(value.company);
+      // this.selectedCompanies.push(value.company);
+      this.selectedCompanies = [... this.selectedCompanies, value.company];
     }
     else {
       this.selectedCompanies = this.selectedCompanies.filter(item => item.entityId !== value.company.entityId);
     }
 
-    console.log(this.selectedCompanies.length)
+    this.dataSource = new MatTableDataSource(this.selectedCompanies);
+    this.dataSource.sort = this.sort;
+  }
 
-    this.changeDetectorRef.markForCheck();
-    // this.dataSource = new MatTableDataSource(this.selectedCompanies);
-    // this.dataSource.sort = this.sort;
+  deleteCompanies(company: any) {
+    console.log('delete ', company)
+    this.selectedCompanies = this.selectedCompanies.filter(item => item.entityId !== company.entityId);
   }
 
 }

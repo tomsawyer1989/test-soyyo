@@ -9,7 +9,8 @@ import { Company } from '../../models/company.model';
 export class CheckListCompaniesComponent implements OnInit {
   @Input() companies: Company[] = [];
   // @Output() selectedCompanies: Company[] = [];
-  @Output() selectedCompanies = new EventEmitter();
+  @Output() addCompaniesEvent = new EventEmitter();
+  @Input() selectedCompanies: Company[] = [];
 
   constructor() { }
 
@@ -17,6 +18,10 @@ export class CheckListCompaniesComponent implements OnInit {
   }
 
   onSelected(e: any, company: Company) {
-    this.selectedCompanies.emit({ e, company });
+    this.addCompaniesEvent.emit({ e, company });
+  }
+
+  isCompany(value: string) {
+    return this.selectedCompanies.some((item) => item.entityId === value);
   }
 }
