@@ -1,13 +1,15 @@
 <section style="margin: 30px;">
     <h1 style="margin-top: 0px;">Prueba técnica Soyyo</h1>
-    <label>Seleccione las empresas que desea mostrar en la tabla.</label>
     <div style="display: flex;">
-        <mat-spinner *ngIf="charge" style="margin-top: 15px;" color="primary" strokeWidth="3" diameter="30"
-            aria-label="loading">
-        </mat-spinner>
-        <app-check-list-companies [companies]="companies" [selectedCompanies]="selectedCompanies"
-            (addCompaniesEvent)="onSelected($event)">
-        </app-check-list-companies>
+        <div>
+            <label>Seleccione las empresas que desea mostrar en la tabla.</label>
+            <mat-spinner *ngIf="charge" style="margin-top: 15px;" color="primary" strokeWidth="3" diameter="30"
+                aria-label="loading">
+            </mat-spinner>
+            <app-check-list-companies [companies]="companies" [selectedCompanies]="selectedCompanies"
+                (addCompaniesEvent)="onSelected($event)">
+            </app-check-list-companies>
+        </div>
         <app-table-companies *ngIf="selectedCompanies.length !== 0;" [data]="selectedCompanies"
             (deleteCompaniesEvent)="deleteCompanies($event)" (editCompaniesEvent)="editCompanies($event)">
         </app-table-companies>
