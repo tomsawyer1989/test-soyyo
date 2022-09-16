@@ -29,7 +29,9 @@
     </ng-container>
     <ng-container matColumnDef="logo">
         <th mat-header-cell *matHeaderCellDef> Logo </th>
-        <td mat-cell *matCellDef="let element"> {{element.logo}} </td>
+        <td mat-cell *matCellDef="let element">
+            <img *ngIf="element.logo !== ''" width="80px" height="50px" src='{{ "assets/images/" + element.logo + ".png" }}' [alt]="element.logo" />
+        </td>
     </ng-container>
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
