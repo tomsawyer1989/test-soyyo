@@ -12,7 +12,7 @@ export class CompaniesPageComponent implements OnInit {
   selectedCompanies: Company[] = [];
   charge: boolean = false;
 
-  constructor(private  companiesService: CompaniesService) { }
+  constructor(private companiesService: CompaniesService) { }
 
   ngOnInit(): void {
     this.getCompanies();
@@ -22,7 +22,7 @@ export class CompaniesPageComponent implements OnInit {
     const companies: Company[] = [];
     this.charge = true;
 
-    for (let i = 1; i <= 10; i ++) {
+    for (let i = 1; i <= 10; i++) {
       const response = await this.companiesService.getCompanies(i).toPromise();
       companies.push(response.data);
     }
@@ -42,5 +42,17 @@ export class CompaniesPageComponent implements OnInit {
 
   deleteCompanies(company: any) {
     this.selectedCompanies = this.selectedCompanies.filter(item => item.entityId !== company.entityId);
+  }
+
+  editCompanies(company: any) {
+    const selectedCompanies = [...this.selectedCompanies];
+
+    selectedCompanies.forEach((item, index) => {
+      if (item.entityId === company.entityId) {
+        selectedCompanies[index] = { ...company };
+      }
+    });
+
+    this.selectedCompanies = selectedCompanies;
   }
 }

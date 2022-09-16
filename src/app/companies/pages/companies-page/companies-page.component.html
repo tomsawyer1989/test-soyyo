@@ -9,7 +9,7 @@
             (addCompaniesEvent)="onSelected($event)">
         </app-check-list-companies>
         <app-table-companies *ngIf="selectedCompanies.length !== 0;" [data]="selectedCompanies"
-            (deleteCompaniesEvent)="deleteCompanies($event)">
+            (deleteCompaniesEvent)="deleteCompanies($event)" (editCompaniesEvent)="editCompanies($event)">
         </app-table-companies>
     </div>
 </section>

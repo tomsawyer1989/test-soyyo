@@ -11,6 +11,7 @@ import { Company } from '../../models/company.model';
 })
 export class TableCompaniesComponent implements OnInit {
   @Output() deleteCompaniesEvent = new EventEmitter();
+  @Output() editCompaniesEvent = new EventEmitter();
   @Input() set data(value: Company[]) {
     this.dataSource = new MatTableDataSource(value);
     this.dataSource.sort = this.sort;
@@ -27,7 +28,8 @@ export class TableCompaniesComponent implements OnInit {
     'logo',
     'actions'
   ];
-  dataSource: any = MatTableDataSource;
+  dataSource!: MatTableDataSource<any>;
+  
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog: MatDialog) {
@@ -49,17 +51,7 @@ export class TableCompaniesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: Company) => {
       if (result) {
-        const selectedCompanies = [...this.selectedCompanies];
-
-        selectedCompanies.forEach((item, index) => {
-          if (item.entityId === result.entityId) {
-            selectedCompanies[index] = { ...result };
-          }
-        });
-
-        this.selectedCompanies = selectedCompanies;
-        // this.dataSource = new MatTableDataSource(this.selectedCompanies);
-        // this.dataSource.sort = this.sort;
+        this.editCompaniesEvent.emit(result);
       }
     });
   }
