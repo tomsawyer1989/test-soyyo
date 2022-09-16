@@ -54,5 +54,15 @@ export class CompaniesPageComponent implements OnInit {
     });
 
     this.selectedCompanies = selectedCompanies;
+
+    const companies = [...this.companies];
+
+    companies.forEach((item, index) => {
+      if (item.entityId === company.entityId) {
+        companies[index] = { ...company };
+      }
+    });
+
+    this.companies = companies;
   }
 }
