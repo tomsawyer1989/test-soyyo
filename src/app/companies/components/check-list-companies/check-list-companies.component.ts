@@ -8,7 +8,6 @@ import { Company } from '../../models/company.model';
 })
 export class CheckListCompaniesComponent implements OnInit {
   @Input() companies: Company[] = [];
-  // @Output() selectedCompanies: Company[] = [];
   @Output() addCompaniesEvent = new EventEmitter();
   @Input() selectedCompanies: Company[] = [];
 

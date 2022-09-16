@@ -5,11 +5,11 @@
         <mat-spinner *ngIf="charge" style="margin-top: 15px;" color="primary" strokeWidth="3" diameter="30"
             aria-label="loading">
         </mat-spinner>
-        {{this.selectedCompanies.length}}
         <app-check-list-companies [companies]="companies" [selectedCompanies]="selectedCompanies"
             (addCompaniesEvent)="onSelected($event)">
         </app-check-list-companies>
         <app-table-companies *ngIf="selectedCompanies.length !== 0;" [data]="selectedCompanies"
-            (deleteCompaniesEvent)="deleteCompanies($event)"></app-table-companies>
+            (deleteCompaniesEvent)="deleteCompanies($event)">
+        </app-table-companies>
     </div>
 </section>
