@@ -1,27 +1,26 @@
 # TestSoyyo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
+Aplicación web que dado un conjunto de entidades o empresas clientes, se muestre en una página un listado con el nombre de las 10 entidades, el usuario debe tener la opción de seleccionar una o varias entidades de este listado y a partir de esto, generar una tabla que muestre las propiedades de cada una.
 
-## Development server
+Cada entidad debe tener en la tabla, la opción de editar datos y eliminar el registro (estas acciones son solo de parte front).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Frontend Angular 12
 
-## Code scaffolding
+## Descripcion
+Utilizando Angular 12 consumimos un servicio de AWS para luego mostrar la información en una tabla.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Version de angular core que utilizamos es "@angular/core": "~12.0.3"
+Y angular material "@angular/material": "^12.0.3"
 
-## Build
+[Angular Material](https://material.angular.io/)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## URL del repositorio
+- [Url github](https://github.com/tomsawyer1989/test-soyyo)
 
-## Running unit tests
+## Como ejecutarlo
+1. git clone https://github.com/tomsawyer1989/test-soyyo.git
+2. cd test-soyyo
+3. npm install
+4. npm start o ng serve
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Navegar a http://localhost:4200/
